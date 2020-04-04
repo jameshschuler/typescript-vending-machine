@@ -1,0 +1,38 @@
+{
+  "inventory": [
+    {
+      "itemId": "ideog77z01",
+      "code": "A0"
+    }
+  ],
+  "items": [
+    {
+      "id": "ideog77z01",
+      "name": "Air Freshener",
+      "icon": "fa-air-freshener",
+      "price": "$2.00",
+      "category": ""
+    },
+    {
+      "id": "ideog77z01",
+      "name": "Bacon",
+      "icon": "fa-bacon",
+      "price": "$0.99",
+      "category": ""
+    },
+    {
+      "id": "ideog77z01",
+      "name": "Apple",
+      "icon": "fa-apple-alt",
+      "price": "2.50",
+      "category": ""
+    },
+    {
+      "id": "ideog77z01",
+      "name": "Beer",
+      "icon": "fa-beer",
+      "price": "5.50",
+      "category": ""
+    }
+  ]
+}
