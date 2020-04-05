@@ -10,17 +10,24 @@ const ControlPanel: React.FC = () => {
     'F',
     '0',
     '1',
-    '2'
+    '2',
   ]);
   const [inputSequence, setInputSequence] = useState('');
 
   const inputPressed = (code: string) => {
     console.log('clicked: ' + code);
+    if (inputSequence.length === 2) {
+      setInputSequence(code);
+    } else {
+      setInputSequence(`${inputSequence}${code}`);
+    }
   };
 
   return (
     <div id="control-panel">
-      <div id="screen"></div>
+      <div id="screen">
+        <span id="screen-text">{inputSequence}</span>
+      </div>
       <div id="credit-card-reader"></div>
       <div id="item-code-input">
         {codes.map((code, index) => {

@@ -94,6 +94,14 @@ code {
           top: 50%;
           left: 47px;
           background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 120%);
+
+          #screen-text {
+            color: #fff;
+            padding: 0.1rem;
+            position: absolute;
+            left: 3px;
+            bottom: -2px;
+          }
         }
 
         #credit-card-reader {
