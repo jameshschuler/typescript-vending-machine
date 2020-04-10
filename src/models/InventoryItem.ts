@@ -5,5 +5,5 @@ export interface InventoryItem {
   price: string;
   quantity: number;
   code: string;
-  itemId: string;
+  category: string;
 }

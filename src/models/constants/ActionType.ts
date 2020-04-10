@@ -1,0 +1,3 @@
+export enum ActionType {
+  PROCESS_TRANSACTION = 'PROCESS_TRANSACTION',
+}

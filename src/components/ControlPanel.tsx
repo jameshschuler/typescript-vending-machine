@@ -1,21 +1,30 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { GlobalContext } from '../context/GlobalState';
 
 const ControlPanel: React.FC = () => {
-  const [codes, setCodes] = useState([
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    '0',
-    '1',
-    '2',
-  ]);
+  const [codes, setCodes] = useState<string[]>([]);
   const [inputSequence, setInputSequence] = useState('');
 
+  const { processTransaction } = useContext(GlobalContext);
+
+  useEffect(() => {
+    setCodes(['A', 'B', 'C', 'D', 'E', 'F', '0', '1', '2']);
+  }, []);
+
+  useEffect(() => {
+    if (inputSequence.length === 2) {
+      if (!inputSequence.match(/^[A-Z][0-9]$/)) {
+        setInputSequence('');
+        return;
+      }
+
+      processTransaction(inputSequence);
+    }
+  }, [inputSequence]);
+
+  const clearInput = () => setInputSequence('');
+
   const inputPressed = (code: string) => {
-    console.log('clicked: ' + code);
     if (inputSequence.length === 2) {
       setInputSequence(code);
     } else {
@@ -41,6 +50,9 @@ const ControlPanel: React.FC = () => {
             </span>
           );
         })}
+        <span className="input-button long" onClick={() => clearInput()}>
+          Clear
+        </span>
       </div>
     </div>
   );

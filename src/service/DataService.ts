@@ -1,11 +1,11 @@
-import data from '../data/data.json';
+import { inventoryData } from '../data/InventoryData';
 import { InventoryItem } from '../models/InventoryItem';
 
-const mergeData = (): InventoryItem[] => {
-  const { inventory, items } = data;
-  return items.map((item, i) => Object.assign({}, item, inventory[i]));
+const data = inventoryData;
+
+export const getInventory = (): InventoryItem[] => data;
+
+export const getItemByCode = (code: string): InventoryItem | null => {
+  const items = data.filter((i) => i.code === code);
+  return items ? items[0] : null;
 };
-
-const mergedData: InventoryItem[] = mergeData();
-
-export const getInventory = (): InventoryItem[] => mergedData;
