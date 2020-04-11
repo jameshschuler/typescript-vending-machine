@@ -1,4 +1,8 @@
+import { PurchasedItem } from './PurchasedItem';
+
 export interface GlobalState {
-  totalMoney: number;
-  processTransaction: (code: string) => any;
+	message: string;
+	purchasedItems: PurchasedItem[];
+	totalMoney: number;
+	processTransaction: (code: string) => any;
 }

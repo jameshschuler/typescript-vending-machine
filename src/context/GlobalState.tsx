@@ -5,43 +5,79 @@ import { getItemByCode } from '../service/DataService';
 import AppReducer from './AppReducer';
 
 const initialState: GlobalState = {
-  totalMoney: 10.0,
-  processTransaction: (code: string) => {},
+	message: '',
+	purchasedItems: [],
+	totalMoney: 10.0,
+	processTransaction: (code: string) => {},
 };
 
 export const GlobalContext = createContext(initialState);
 
 interface GlobalProviderProps {
-  children: any;
+	children: any;
 }
 
 // Provider component
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+	const [{ purchasedItems, message, totalMoney }, dispatch] = useReducer(
+		AppReducer,
+		initialState
+	);
 
-  // Actions:
-  const processTransaction = (code: string): void => {
-    const item = getItemByCode(code);
+	// Actions:
+	const processTransaction = (code: string): void => {
+		const item = getItemByCode(code);
 
-    console.log(item);
+		if (!item) {
+			return;
+		}
 
-    if (item) {
-      // TODO:
-    }
+		const { price, id, name, icon } = item;
 
-    dispatch({
-      type: ActionType.PROCESS_TRANSACTION,
-      payload: {
-        code,
-      },
-    });
-  };
+		// Update total money
+		const updatedTotalMoney = totalMoney - price;
+		if (updatedTotalMoney < 0) {
+			dispatch({
+				type: ActionType.ALERT,
+				payload: {
+					message: 'Not enough money!',
+				},
+			});
+			return;
+		}
 
-  return (
-    <GlobalContext.Provider
-      value={{ totalMoney: state.totalMoney, processTransaction }}
-    >
-      {children}
-    </GlobalContext.Provider>
-  );
+		// Update item quantity
+		const updatedItemQuantity = item.quantity - 1;
+
+		// Update user's purchased items
+		let alreadyPurchasedItem = purchasedItems.find((i) => i.id === id);
+		if (alreadyPurchasedItem) {
+			alreadyPurchasedItem.quantity += 1;
+		} else {
+			alreadyPurchasedItem = {
+				id,
+				name,
+				quantity: 1,
+				icon,
+			};
+			purchasedItems.push(alreadyPurchasedItem);
+		}
+
+		dispatch({
+			type: ActionType.PROCESS_TRANSACTION,
+			payload: {
+				updatedTotalMoney,
+				updatedItemQuantity,
+				purchasedItems,
+			},
+		});
+	};
+
+	return (
+		<GlobalContext.Provider
+			value={{ message, purchasedItems, totalMoney, processTransaction }}
+		>
+			{children}
+		</GlobalContext.Provider>
+	);
 };

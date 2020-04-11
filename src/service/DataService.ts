@@ -5,7 +5,6 @@ const data = inventoryData;
 
 export const getInventory = (): InventoryItem[] => data;
 
-export const getItemByCode = (code: string): InventoryItem | null => {
-  const items = data.filter((i) => i.code === code);
-  return items ? items[0] : null;
+export const getItemByCode = (code: string): InventoryItem | undefined => {
+	return data.find((i) => i.code === code);
 };

@@ -2,14 +2,20 @@ import { Action } from '../models/Action';
 import { ActionType } from '../models/constants/ActionType';
 import { GlobalState } from '../models/GlobalState';
 
-export default (state: GlobalState, action: Action) => {
-  switch (action.type) {
-    case ActionType.PROCESS_TRANSACTION:
-      console.log(action);
-      return {
-        ...state,
-      };
-    default:
-      return state;
-  }
+export default (state: GlobalState, action: Action): GlobalState => {
+	switch (action.type) {
+		case ActionType.ALERT:
+			return {
+				...state,
+				message: action.payload.message,
+			};
+		case ActionType.PROCESS_TRANSACTION:
+			return {
+				...state,
+				totalMoney: action.payload.updatedTotalMoney,
+				purchasedItems: action.payload.purchasedItems,
+			};
+		default:
+			return state;
+	}
 };

@@ -1,0 +1,20 @@
+#money-maker {
+	height: 300px;
+	margin-top: 5rem;
+	text-align: center;
+
+	span {
+		color: darkgreen;
+		user-select: none;
+
+		&:hover {
+			color: #014c01;
+			cursor: pointer;
+
+			svg {
+				font-size: 6.5rem;
+				transition: font-size 0.35s ease;
+			}
+		}
+	}
+}
