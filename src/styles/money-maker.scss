@@ -1,5 +1,5 @@
 #money-maker {
-	height: 300px;
+	height: 350px;
 	margin-top: 5rem;
 	text-align: center;
 
@@ -15,6 +15,34 @@
 				font-size: 6.5rem;
 				transition: font-size 0.35s ease;
 			}
+		}
+	}
+
+	#icon-container {
+		position: relative;
+		height: 100px;
+		outline: 1px solid black;
+		width: 75%;
+		margin: 1rem auto 0 auto;
+
+		@keyframes falling-icon {
+			from {
+				top: 0;
+				opacity: 1;
+				display: block;
+			}
+			to {
+				top: 100px;
+				display: none;
+				opacity: 0;
+			}
+		}
+
+		.falling-icon {
+			animation-name: falling-icon;
+			animation-duration: 4s;
+			animation-fill-mode: forwards;
+			position: absolute;
 		}
 	}
 }
