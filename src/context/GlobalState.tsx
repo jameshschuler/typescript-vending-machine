@@ -8,6 +8,7 @@ const initialState: GlobalState = {
 	message: '',
 	purchasedItems: [],
 	totalMoney: 10.0,
+	updateTotalMoney: (value: number) => {},
 	processTransaction: (code: string) => {},
 };
 
@@ -69,13 +70,31 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
 				updatedTotalMoney,
 				updatedItemQuantity,
 				purchasedItems,
+				message: '',
+			},
+		});
+	};
+
+	const updateTotalMoney = (value: number): void => {
+		const updatedTotalMoney = totalMoney + value;
+
+		dispatch({
+			type: ActionType.UPDATE_TOTAL_MONEY,
+			payload: {
+				updatedTotalMoney,
 			},
 		});
 	};
 
 	return (
 		<GlobalContext.Provider
-			value={{ message, purchasedItems, totalMoney, processTransaction }}
+			value={{
+				message,
+				purchasedItems,
+				totalMoney,
+				processTransaction,
+				updateTotalMoney,
+			}}
 		>
 			{children}
 		</GlobalContext.Provider>

@@ -14,6 +14,12 @@ export default (state: GlobalState, action: Action): GlobalState => {
 				...state,
 				totalMoney: action.payload.updatedTotalMoney,
 				purchasedItems: action.payload.purchasedItems,
+				message: action.payload.message,
+			};
+		case ActionType.UPDATE_TOTAL_MONEY:
+			return {
+				...state,
+				totalMoney: action.payload.updatedTotalMoney,
 			};
 		default:
 			return state;

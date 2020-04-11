@@ -5,4 +5,5 @@ export interface GlobalState {
 	purchasedItems: PurchasedItem[];
 	totalMoney: number;
 	processTransaction: (code: string) => any;
+	updateTotalMoney: (value: number) => any;
 }

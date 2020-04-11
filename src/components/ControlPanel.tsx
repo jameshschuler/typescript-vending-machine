@@ -8,7 +8,7 @@ const ControlPanel: React.FC = () => {
 	const { processTransaction } = useContext(GlobalContext);
 
 	useEffect(() => {
-		setCodes(['A', 'B', 'C', 'D', 'E', 'F', '0', '1', '2', '3']);
+		setCodes(['A', 'B', 'C', 'D', 'E', 'F', '0', '1', '2', '3', '4', '5']);
 	}, []);
 
 	useEffect(() => {
